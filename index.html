@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>निर्वाचन आयोग · मतदान खेल 2079</title>
+    <title>husig · election games · tea break build</title>
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inconsolata:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <!-- HuSig style: Inter + clean sans, plus a mono for fun -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -18,257 +18,289 @@
         }
 
         body {
-            background-color: #faf3e8;  /* old paper/cream */
-            background-image: 
-                linear-gradient(rgba(200, 50, 50, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(200, 50, 50, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            font-family: 'Inter', sans-serif;
-            color: #2d1e14;
+            background: linear-gradient(145deg, #f8faff 0%, #eef2fa 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1b2b4e;
             line-height: 1.5;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            cursor: default;
-        }
-
-        /* stamp cursor on cards */
-        .game-card:hover {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="%23b33b3b" stroke="%238b0000" stroke-width="2"/><text x="16" y="22" font-size="16" text-anchor="middle" fill="%23ffd966" font-family="Arial" font-weight="bold">⚡</text></svg>') 16 16, auto;
+            padding: 1.5rem;
         }
 
         .container {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 2rem 2rem 1rem;
         }
 
-        /* header with stamp animation */
-        .header {
-            position: relative;
-            margin-bottom: 3rem;
-            border-bottom: 3px solid #a1312b;
-            padding-bottom: 1.5rem;
+        /* ---------- HuSig inspired header ---------- */
+        .husig-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 60px;
+            padding: 0.8rem 1.8rem;
+            box-shadow: 0 8px 20px rgba(0,20,80,0.08);
+            border: 1px solid rgba(25, 100, 210, 0.15);
         }
 
-        .stamp-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .main-title {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: clamp(2rem, 6vw, 3.8rem);
-            line-height: 1.2;
-            color: #1f1109;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .main-title small {
-            font-family: 'Inconsolata', monospace;
-            font-size: 1.2rem;
-            display: block;
-            color: #a1312b;
-            letter-spacing: 2px;
-            font-weight: 400;
-            text-transform: none;
-        }
-
-        .stamp-overlay {
-            position: absolute;
-            top: -10px;
-            right: -30px;
-            background: #b1443e;
-            color: #ffefc0;
-            font-family: 'Inconsolata', monospace;
+        .husig-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             font-weight: 700;
+            font-size: 1.7rem;
+            letter-spacing: -0.02em;
+            color: #0f2b4f;
+        }
+
+        .husig-logo span {
+            background: #0f2b4f;
+            color: white;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .husig-tag {
+            background: #d9e6ff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #0a1e3b;
+            border: 1px solid #adc6ff;
+        }
+
+        .husig-tag i {
+            color: #3069ff;
+            margin-right: 6px;
+        }
+
+        /* disclaimer banner — floating fun */
+        .disclaimer-fun {
+            background: #ffe8d9;
+            border-left: 10px solid #ff8a5c;
+            border-radius: 40px 12px 12px 40px;
+            padding: 1rem 2rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 20px rgba(255, 100, 50, 0.1);
+            transform: rotate(0.3deg);
+            transition: transform 0.2s;
+        }
+
+        .disclaimer-fun:hover {
+            transform: rotate(0deg) scale(1.01);
+        }
+
+        .disclaimer-fun p {
+            font-family: 'Space Mono', monospace;
+            font-weight: 400;
+            color: #733c1e;
+            margin: 0;
+        }
+
+        .disclaimer-fun i {
             font-size: 2rem;
-            padding: 0.4rem 1.2rem;
-            border-radius: 30px 5px 30px 5px;
-            transform: rotate(8deg) scale(0);
-            opacity: 0;
-            box-shadow: 0 5px 0 #5e1d1a;
-            border: 2px solid #f5cb8b;
-            animation: stampPop 0.6s ease-out forwards;
-            pointer-events: none;
-            white-space: nowrap;
+            color: #ff5e1a;
+            margin-right: 1rem;
         }
 
-        @keyframes stampPop {
-            0% { transform: rotate(8deg) scale(2); opacity: 0; }
-            50% { transform: rotate(8deg) scale(1.1); opacity: 1; }
-            80% { transform: rotate(8deg) scale(0.95); opacity: 0.9; }
-            100% { transform: rotate(8deg) scale(1); opacity: 0.15; }
-        }
-
-        .date-tag {
-            display: inline-block;
-            background: #1f1109;
-            color: #f5dbb1;
-            padding: 0.3rem 1rem;
-            font-family: 'Inconsolata', monospace;
+        .btn-official {
+            background: white;
+            border: none;
+            border-radius: 30px;
+            padding: 0.5rem 1.4rem;
             font-weight: 600;
-            border-radius: 0;
-            margin-top: 0.5rem;
-            border-left: 6px solid #b33b3b;
-            font-size: 1.2rem;
+            color: #1e3c72;
+            text-decoration: none;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-official:hover {
+            background: #1e3c72;
+            color: white;
+            box-shadow: 0 8px 12px rgba(0,40,100,0.2);
         }
 
         /* game grid */
         .game-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin: 3rem 0 3rem;
         }
 
         .game-card {
-            background: #fefcf5;
-            border: 3px solid #2d1e14;
-            box-shadow: 12px 12px 0 rgba(150, 40, 40, 0.3);
-            padding: 1.5rem 1.2rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(48, 105, 255, 0.2);
+            border-radius: 32px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 20px 40px -12px rgba(0, 45, 80, 0.2);
+            transition: all 0.25s ease;
+            text-decoration: none;
+            color: inherit;
             display: flex;
             flex-direction: column;
             position: relative;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .game-card:link, .game-card:visited {
-            color: inherit;
+            overflow: hidden;
         }
 
         .game-card:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 16px 16px 0 rgba(150, 40, 40, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 30px 55px -10px #3069ff55;
+            border-color: #3069ff;
         }
 
-        .card-3d {
-            border-top: 10px solid #a1312b;
+        /* avatar / credit row */
+        .dev-avatar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+        }
+
+        .avatar-icon {
+            width: 48px;
+            height: 48px;
+            background: #d0dfff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #1b2b4e;
+            border: 2px solid white;
+            box-shadow: 0 6px 0 #a0b6e0;
+        }
+
+        .dev-name {
+            font-weight: 600;
+            background: #eef3ff;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            color: #0f2b4f;
+        }
+
+        .dev-name i {
+            color: #3069ff;
+            margin-right: 6px;
         }
 
         .card-icon {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .card-icon .emblem {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            color: #a1312b;
+            font-size: 2.4rem;
+            margin-bottom: 0.3rem;
         }
 
         .card-title {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: 1.8rem;
-            border-bottom: 2px dashed #a1312b;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
+            font-weight: 800;
+            font-size: 2rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
             display: flex;
             justify-content: space-between;
             align-items: baseline;
         }
 
-        .card-title span {
-            font-family: 'Inconsolata', monospace;
-            font-size: 1rem;
-            background: #2d1e14;
-            color: #f5dbb1;
-            padding: 0.2rem 0.5rem;
-        }
-
         .game-preview {
-            font-family: 'Inconsolata', monospace;
-            background: #ebe3d5;
-            padding: 0.8rem;
-            margin: 1rem 0;
-            border-left: 6px solid #b33b3b;
-            min-height: 80px;
+            background: #ffffffd0;
+            border-radius: 24px;
+            padding: 1rem;
+            margin: 1rem 0 1.2rem;
+            border: 1px dashed #3069ff80;
+            font-family: 'Space Mono', monospace;
+            min-height: 100px;
         }
 
         .hover-tip {
             font-size: 0.9rem;
-            color: #a1312b;
+            color: #3069ff;
+            font-weight: 500;
             margin-top: 0.5rem;
-            font-weight: 600;
+            display: flex;
+            gap: 15px;
         }
 
-        .ballot-symbol {
-            font-size: 2.5rem;
-            line-height: 1;
-            color: #2d1e14;
+        .key-badge {
+            background: #1b2b4e;
+            color: white;
+            padding: 0.25rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
         }
 
-        .flicker-title {
-            transition: all 0.1s;
-        }
-
-        .key-hint {
-            display: inline-block;
-            background: #2d1e14;
-            color: #f5dbb1;
-            padding: 0.2rem 0.6rem;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border-radius: 2px;
-        }
-
-        /* quick reference panel */
+        /* quick reference - husig style */
         .ref-panel {
             margin: 3rem 0 2rem;
-            border: 2px solid #2d1e14;
-            background: #fefcf5;
+            border-radius: 40px;
+            background: white;
+            box-shadow: 0 20px 35px -10px #1b2b4e1a;
+            border: 1px solid #cdddff;
         }
 
         .ref-header {
-            background: #a1312b;
-            color: #ffefc0;
-            padding: 1rem 1.5rem;
-            font-family: 'Playfair Display', serif;
+            background: #0f2b4f;
+            color: white;
+            padding: 1.5rem 2rem;
             font-weight: 700;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
+            border-radius: 40px 40px 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
+            transition: background 0.2s;
         }
 
-        .ref-header i {
-            transition: transform 0.3s;
+        .ref-header:hover {
+            background: #1b3c6b;
         }
 
         .ref-content {
-            padding: 0;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-out, padding 0.3s;
-            background: #fcf7ef;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #fcfdff;
+            border-radius: 0 0 40px 40px;
         }
 
         .ref-content.show {
-            padding: 1.5rem;
-            max-height: 700px;
+            max-height: 800px;
+            padding: 2rem;
         }
 
         .ref-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            font-family: 'Inconsolata', monospace;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            font-family: 'Inter', sans-serif;
         }
 
         .ref-block h3 {
-            font-family: 'Playfair Display', serif;
-            border-bottom: 2px solid #a1312b;
+            font-weight: 700;
+            border-bottom: 3px solid #3069ff;
             display: inline-block;
-            margin-bottom: 0.5rem;
+            padding-bottom: 0.2rem;
+            margin-bottom: 0.8rem;
         }
 
         .ref-block ul {
@@ -276,349 +308,333 @@
         }
 
         .ref-block li {
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
+            font-size: 0.95rem;
         }
 
         .footer {
-            margin-top: 2rem;
-            padding: 1.5rem 0;
-            border-top: 3px double #a1312b;
-            font-family: 'Inconsolata', monospace;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            color: #4b2f21;
-            font-size: 0.9rem;
+            color: #3f5579;
+            border-top: 2px dotted #3069ff60;
         }
 
-        .footer .official {
-            font-weight: 700;
-            color: #a1312b;
+        .floating-emoji {
+            animation: float 4s ease-in-out infinite;
+            display: inline-block;
         }
 
-        .footer a {
-            color: #2d1e14;
-            text-decoration: none;
-            border-bottom: 1px dashed;
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
 
-        .footer a:hover {
-            color: #a1312b;
+        .stamp-click-effect {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2.5rem;
+            z-index: 9999;
+            animation: fadeStamp 1s forwards;
         }
 
-        @media (max-width: 600px) {
-            .ref-grid { grid-template-columns: 1fr; }
-            .stamp-overlay { font-size: 1.4rem; right: -10px; }
-        }
-
-        /* specific card micro-interactions via js */
-        .counter-badge {
-            background: #a1312b;
-            color: #f5dbb1;
-            padding: 0.2rem 0.6rem;
-            font-size: 1rem;
+        @keyframes fadeStamp {
+            0% { opacity: 0.8; transform: scale(0.5) rotate(-10deg); }
+            100% { opacity: 0; transform: scale(2) rotate(15deg); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- header with stamp -->
-        <div class="header">
-            <div class="stamp-container">
-                <div class="main-title">
-                    निर्वाचन आयोग नेपाल<br>
-                    <small>ELECTION COMMISSION · VOTING GAMES 2079</small>
-                </div>
-                <div class="stamp-overlay">⚡ FALGUN 21 ⚡</div>
-            </div>
-            <div class="date-tag">
-                <i class="fas fa-stamp" style="margin-right: 8px;"></i> 卐 मतदान परीक्षण 卐
-            </div>
+<div class="container">
+    <!-- HuSig organizer bar (design language) -->
+    <div class="husig-bar">
+        <div class="husig-logo">
+            <i class="fas fa-brain" style="color:#3069ff; font-size: 2rem;"></i> 
+            husig<span>organizer</span>
         </div>
-
-        <!-- game cards grid -->
-        <div class="game-grid">
-            <!-- CARD 1: Nepal Election 3D -->
-            <a href="https://ballot-paper.vercel.app/" target="_blank" class="game-card card-3d" id="card-3d">
-                <div class="card-icon">
-                    <span class="emblem">🗳️</span>
-                    <span class="key-hint">↑↓←→ + SPACE</span>
-                </div>
-                <div class="card-title">
-                    3D मतदान <span>BALLOT 3D</span>
-                </div>
-                <div class="game-preview" id="preview-3d">
-                    <div style="display: flex; gap: 5px; font-size: 2rem; justify-content: center;">
-                        <span>⬜</span><span style="color:#a1312b;">🕹️</span><span>⬜</span>
-                    </div>
-                    <div style="text-align: center; margin-top: 5px;">[ मतपेटी ]</div>
-                </div>
-                <div class="hover-tip">
-                    <i class="fas fa-arrows-alt"></i> move character · <i class="fas fa-stamp"></i> stamp
-                </div>
-                <div style="margin-top: 0.8rem; font-size: 0.9rem; color: #5e3a2b;">
-                    📍 Position: हुलाक बाकस
-                </div>
-            </a>
-
-            <!-- CARD 2: Ballot Blitz / Steady Hand -->
-            <a href="https://saveenstha.github.io/election_games/" target="_blank" class="game-card" id="card-blitz">
-                <div class="card-icon">
-                    <span class="emblem">⚡🤚</span>
-                    <span class="key-hint">BLITZ / HAND</span>
-                </div>
-                <div class="card-title">
-                    ब्यालेट ब्लिट्ज <span id="flicker-title">STEADY HAND</span>
-                </div>
-                <div class="game-preview" id="preview-blitz">
-                    <div style="display: flex; justify-content: space-between;">
-                        <span>⏱️</span>
-                        <span id="timer-blitz" class="counter-badge">00:00</span>
-                    </div>
-                    <div style="height: 4px; background:#b1443e; width:100%; margin: 8px 0;"></div>
-                    <div style="font-family: monospace;">⚡ गति र स्थिरता ⚡</div>
-                </div>
-                <div class="hover-tip">
-                    <i class="fas fa-bolt"></i> fast decisions · steady aim
-                </div>
-            </a>
-
-            <!-- CARD 3: Ballot Inspector -->
-            <a href="https://crypticsy.github.io/ballot-inspector/" target="_blank" class="game-card" id="card-inspector">
-                <div class="card-icon">
-                    <span class="emblem">🔍卐</span>
-                    <span class="key-hint">[V] [I]</span>
-                </div>
-                <div class="card-title">
-                    मतपत्र परीक्षक <span>INSPECTOR</span>
-                </div>
-                <div class="game-preview" id="preview-inspector">
-                    <div style="display: flex; gap: 10px; align-items: center; justify-content: center;">
-                        <span style="font-size:2rem;">卐</span>
-                        <span style="font-size:1.2rem;" id="valid-invalid">VALID 8</span>
-                    </div>
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-top:5px;">
-                        <span class="key-hint">V</span> = valid <span class="key-hint">I</span> = invalid
-                    </div>
-                </div>
-                <div class="hover-tip">
-                    <i class="fas fa-check-circle"></i> +2s / <i class="fas fa-times-circle"></i> -8s
-                </div>
-            </a>
+        <div class="husig-tag">
+            <i class="fas fa-mug-hot"></i> tea break builds · election games
         </div>
-
-        <!-- Quick reference panel (collapsible) -->
-        <div class="ref-panel">
-            <div class="ref-header" id="ref-toggle">
-                <span>⚡ QUICK REFERENCE · द्रुत नियमावली ⚡</span>
-                <i class="fas fa-chevron-down" id="toggle-icon"></i>
-            </div>
-            <div class="ref-content" id="ref-content">
-                <div class="ref-grid">
-                    <div class="ref-block">
-                        <h3>🟢 VALID (मान्य) 卐</h3>
-                        <ul>
-                            <li><span>✔️</span> एक 卐 चिन्ह एक बाकसमा</li>
-                            <li><span>✔️</span> कक्षभित्र स्पष्ट</li>
-                            <li><span>✔️</span> हस्ताक्षर सहित</li>
-                            <li><span>✔️</span> मतपत्र अक्षत</li>
-                            <li><span>✔️</span> कुनै पहिचान चिह्न छैन</li>
-                        </ul>
-                    </div>
-                    <div class="ref-block">
-                        <h3>🔴 INVALID (अवैध) ✗</h3>
-                        <ul>
-                            <li><span>✗</span> धेरै चिन्ह / खाली</li>
-                            <li><span>✗</span> सीमामा चिन्ह</li>
-                            <li><span>✗</span> लेखिएको / नाम</li>
-                            <li><span>✗</span> अधिकारीको हस्ताक्षर छैन</li>
-                            <li><span>✗</span> च्यातिएको / क्षतिग्रस्त</li>
-                        </ul>
-                    </div>
-                    <div class="ref-block">
-                        <h3>🎮 GAME CONTROLS</h3>
-                        <ul>
-                            <li><span>🕹️</span> 3D: ↑↓←→ move, SPACE stamp</li>
-                            <li><span>⚡</span> Blitz: माउस / छिटो छनोट</li>
-                            <li><span>🔍</span> Inspector: [V] valid · [I] invalid</li>
-                        </ul>
-                    </div>
-                    <div class="ref-block">
-                        <h3>📅 निर्वाचन २०७९</h3>
-                        <ul>
-                            <li><span>🗳️</span> फाल्गुन २१ गते</li>
-                            <li><span>⏱️</span> समय समाप्ति: सिफ्ट समाप्त</li>
-                            <li><span>🎯</span> शुद्धता: +२ सेकेन्ड / −८ सेकेन्ड</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- footer -->
-        <div class="footer">
-            <div class="official">© निर्वाचन आयोग नेपाल · काठमाडौं, २०७९</div>
-            <div>
-                <span>सहकर्मी: </span>
-                <a href="https://ballot-paper.vercel.app/" target="_blank">3D TEAM</a> · 
-                <a href="https://saveenstha.github.io/election_games/" target="_blank">BLITZ/HAND</a> · 
-                <a href="https://crypticsy.github.io/ballot-inspector/" target="_blank">INSPECTOR</a>
-            </div>
-            <div><i class="fas fa-stamp"></i> मतदान खेल २०७९ 卐</div>
+        <div style="display: flex; gap: 12px;">
+            <span style="background:#3069ff10; padding:8px 14px; border-radius:30px;">
+                <i class="fas fa-gamepad"></i> 3 games
+            </span>
         </div>
     </div>
 
-    <script>
-        (function() {
-            // Card 2: flicker title & random countdown timer on hover
-            const cardBlitz = document.getElementById('card-blitz');
-            const flickerSpan = document.getElementById('flicker-title');
-            const timerSpan = document.getElementById('timer-blitz');
-            let blitzInterval = null;
-            let timerInterval = null;
-            let countdown = 0;
+    <!-- disclaimer fun zone (accurate date 2082 BS, disclaimer) -->
+    <div class="disclaimer-fun">
+        <i class="fas fa-face-smile-wink floating-emoji"></i>
+        <p><strong>⚠️ मनोरञ्जन मात्र · just for fun · २०८२ साल</strong><br>
+        <span style="font-size:0.9rem;">These games are a team break activity — not official election info. Dates, rules may be wrong. Always check <a href="#" style="color:#a14500; text-decoration:underline;">official election sites</a> for accurate data.</span></p>
+        <a href="#" class="btn-official"><i class="fas fa-check-circle"></i> निर्वाचन आयोग (official)</a>
+    </div>
 
-            function startBlitzHover() {
-                // flicker between Ballot Blitz and Steady Hand
-                let titles = ['BALLOT BLITZ', 'STEADY HAND'];
-                let index = 0;
-                if (blitzInterval) clearInterval(blitzInterval);
-                blitzInterval = setInterval(() => {
-                    index = (index + 1) % 2;
-                    flickerSpan.textContent = titles[index];
-                }, 300);
+    <!-- Game cards with proper credit & avatars -->
+    <div class="game-grid">
+        <!-- CARD 1: subhamadhikari / ballot-paper 3D -->
+        <a href="https://ballot-paper.vercel.app/" target="_blank" class="game-card" id="card3d">
+            <div class="dev-avatar">
+                <div class="avatar-icon">🇳🇵</div>
+                <span class="dev-name"><i class="fab fa-github"></i> subhamadhikari</span>
+            </div>
+            <div class="card-icon">🎮 🗳️</div>
+            <div class="card-title">3D मतदान <span style="font-size:1rem; background:#eef3ff; padding:0.2rem 1rem; border-radius:30px;">3D</span></div>
+            <div class="game-preview" id="preview3d">
+                <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+                    <span style="font-size:2rem;">⬜🕹️⬜</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:8px;">
+                    <span class="key-badge">↑↓←→</span>
+                    <span class="key-badge">SPACE ⚡</span>
+                </div>
+                <div style="margin-top:10px; font-family:monospace;">📍 हुलाक बाकस ३डी</div>
+            </div>
+            <div class="hover-tip">
+                <i class="fas fa-arrows-alt"></i> move & stamp · <span id="pos3d">orbit camera</span>
+            </div>
+        </a>
 
-                // random countdown timer (simulate)
-                countdown = Math.floor(Math.random() * 20) + 10; // 10-30 sec
-                timerSpan.textContent = `⏱️ ${countdown}s`;
-                if (timerInterval) clearInterval(timerInterval);
-                timerInterval = setInterval(() => {
-                    countdown -= 1;
-                    if (countdown < 0) countdown = 0;
-                    timerSpan.textContent = `⏱️ ${countdown}s`;
-                    if (countdown === 0) {
-                        clearInterval(timerInterval);
-                        timerInterval = null;
-                    }
-                }, 400);
+        <!-- CARD 2: saveenstha / Ballot Blitz + Steady Hand -->
+        <a href="https://saveenstha.github.io/election_games/" target="_blank" class="game-card" id="cardBlitz">
+            <div class="dev-avatar">
+                <div class="avatar-icon">⚡</div>
+                <span class="dev-name"><i class="fab fa-github"></i> saveenstha</span>
+            </div>
+            <div class="card-icon">🤚 ⚡</div>
+            <div class="card-title">ब्यालेट ब्लिट्ज <span style="font-size:1rem;">/ STEADY</span></div>
+            <div class="game-preview" id="blitzPreview">
+                <div style="display:flex; justify-content:space-between;">
+                    <span><i class="fas fa-stopwatch"></i></span>
+                    <span id="blitzTimer" style="background:#0f2b4f; color:white; padding:0.2rem 0.8rem; border-radius: 20px;">00:00</span>
+                </div>
+                <div style="height:6px; background:#3069ff; width:70%; margin:12px 0; border-radius:4px;"></div>
+                <div style="display:flex; gap:10px;">
+                    <span>💨 गति</span> <span>🎯 स्थिरता</span>
+                </div>
+            </div>
+            <div class="hover-tip">
+                <i class="fas fa-bolt"></i> fast / steady · flicker on hover
+            </div>
+        </a>
+
+        <!-- CARD 3: crypticsy / Ballot Inspector -->
+        <a href="https://crypticsy.github.io/ballot-inspector/" target="_blank" class="game-card" id="cardInspector">
+            <div class="dev-avatar">
+                <div class="avatar-icon">🔍</div>
+                <span class="dev-name"><i class="fab fa-github"></i> crypticsy</span>
+            </div>
+            <div class="card-icon">卐 🧾</div>
+            <div class="card-title">मतपत्र परीक्षक <span style="font-size:1rem;">INSPECTOR</span></div>
+            <div class="game-preview" id="inspectorPreview">
+                <div style="display:flex; gap:15px; align-items:center; justify-content:center;">
+                    <span style="font-size:2.5rem;">卐</span>
+                    <span id="validCounter" style="background:#1b2b4e; color:white; padding:0.3rem 0.8rem; border-radius:30px;">VALID 12</span>
+                </div>
+                <div style="display:flex; gap:15px; margin-top:10px; justify-content:center;">
+                    <span class="key-badge">V</span> = valid <span class="key-badge">I</span> = invalid
+                </div>
+            </div>
+            <div class="hover-tip">
+                <i class="fas fa-check"></i> +2s / <i class="fas fa-times"></i> −8s
+            </div>
+        </a>
+    </div>
+
+    <!-- Quick reference panel (HuSig clean style) with correct 2082 BS from inspector page -->
+    <div class="ref-panel">
+        <div class="ref-header" id="refToggle">
+            <span>📋 QUICK REFERENCE · द्रुत नियम (from inspector game, 2082 BS)</span>
+            <i class="fas fa-chevron-down" id="toggleIcon"></i>
+        </div>
+        <div class="ref-content" id="refContent">
+            <div class="ref-grid">
+                <div class="ref-block">
+                    <h3>✅ VALID (卐)</h3>
+                    <ul>
+                        <li>✔️ Exactly ONE 卐 in ONE party box</li>
+                        <li>✔️ Mark clearly inside a single cell</li>
+                        <li>✔️ Election officer signature present</li>
+                        <li>✔️ Ballot intact — no tears</li>
+                        <li>✔️ No identifying marks/names</li>
+                    </ul>
+                </div>
+                <div class="ref-block">
+                    <h3>❌ INVALID</h3>
+                    <ul>
+                        <li>✗ Multiple marks / Blank</li>
+                        <li>✗ Mark on border</li>
+                        <li>✗ Identifying marks (names, fingerprint)</li>
+                        <li>✗ No signature</li>
+                        <li>✗ Torn / Damaged / Smudged</li>
+                    </ul>
+                </div>
+                <div class="ref-block">
+                    <h3>🎮 GAME CONTROLS</h3>
+                    <ul>
+                        <li>🕹️ 3D: ↑↓←→ move, SPACE stamp</li>
+                        <li>⚡ Blitz: mouse / click</li>
+                        <li>🔍 Inspector: [V] valid · [I] invalid</li>
+                    </ul>
+                </div>
+                <div class="ref-block">
+                    <h3>🗓️ ELECTION 2082 BS</h3>
+                    <ul>
+                        <li>⚡ Time shift: +2s / −8s</li>
+                        <li>🧾 मतपत्र परीक्षक</li>
+                        <li><i class="fas fa-stamp"></i> फाल्गुन २१ (Falgun 21)</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top:1.5rem; font-style:italic; background:#eaf0ff; padding:0.8rem; border-radius:60px; text-align:center;">⚠️ Rules simplified for gameplay — see official Election Commission, Nepal for accurate info.</p>
+        </div>
+    </div>
+
+    <!-- footer with all credits + husig as organizer -->
+    <div class="footer">
+        <div><i class="fas fa-mug-saucer"></i> tea break project @ <strong>husig.ai</strong> · data & AI team</div>
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+            <span><i class="fab fa-github"></i> subhamadhikari</span>
+            <span><i class="fab fa-github"></i> saveenstha</span>
+            <span><i class="fab fa-github"></i> crypticsy</span>
+        </div>
+        <div class="floating-emoji">🗳️ 卐 ⚡</div>
+    </div>
+</div>
+
+<!-- javascript: interactions, fun effects, timers, flicker, etc. -->
+<script>
+    (function() {
+        // ---- card 2: blitz flicker & timer ----
+        const cardBlitz = document.getElementById('cardBlitz');
+        const blitzTimer = document.getElementById('blitzTimer');
+        let blitzInterval, timerInterval;
+
+        function startBlitz() {
+            // flicker title in preview
+            const previewDiv = document.getElementById('blitzPreview');
+            const titles = ['⚡ BALLOT BLITZ', '🤚 STEADY HAND'];
+            let idx = 0;
+            blitzInterval = setInterval(() => {
+                idx = (idx + 1) % 2;
+                previewDiv.querySelector('div:last-child').innerHTML = titles[idx];
+            }, 400);
+
+            // countdown
+            let time = Math.floor(Math.random() * 20) + 15;
+            blitzTimer.innerText = `⏱️ ${time}s`;
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                time -= 1;
+                if (time < 0) time = 0;
+                blitzTimer.innerText = `⏱️ ${time}s`;
+                if (time === 0) clearInterval(timerInterval);
+            }, 500);
+        }
+
+        function stopBlitz() {
+            clearInterval(blitzInterval);
+            clearInterval(timerInterval);
+            document.getElementById('blitzPreview').querySelector('div:last-child').innerHTML = '💨 गति &nbsp; 🎯 स्थिरता';
+            blitzTimer.innerText = '00:00';
+        }
+
+        cardBlitz.addEventListener('mouseenter', startBlitz);
+        cardBlitz.addEventListener('mouseleave', stopBlitz);
+
+        // ---- card 3: inspector flicker valid count + key hint color ----
+        const cardInspector = document.getElementById('cardInspector');
+        const validCounter = document.getElementById('validCounter');
+        let inspectorInterval;
+
+        function startInspector() {
+            inspectorInterval = setInterval(() => {
+                const valid = Math.floor(Math.random() * 30) + 10;
+                const invalid = Math.floor(Math.random() * 8);
+                validCounter.innerText = `VALID ${valid} / INVALID ${invalid}`;
+                // flash key hint colors
+                const keyBadges = document.querySelectorAll('#inspectorPreview .key-badge');
+                keyBadges.forEach(b => {
+                    b.style.backgroundColor = b.style.backgroundColor === 'rgb(48, 105, 255)' ? '#1b2b4e' : '#3069ff';
+                });
+            }, 500);
+        }
+
+        function stopInspector() {
+            clearInterval(inspectorInterval);
+            validCounter.innerText = 'VALID 12 / INVALID 3';
+            const keyBadges = document.querySelectorAll('#inspectorPreview .key-badge');
+            keyBadges.forEach(b => b.style.backgroundColor = '');
+        }
+
+        cardInspector.addEventListener('mouseenter', startInspector);
+        cardInspector.addEventListener('mouseleave', stopInspector);
+
+        // ---- card1 3d: dynamic position text ----
+        const card3d = document.getElementById('card3d');
+        const posSpan = card3d.querySelector('#preview3d div:last-child');
+        const originalPos = posSpan.innerText;
+        card3d.addEventListener('mouseenter', () => {
+            posSpan.innerText = '📍 मतदान केन्द्र :: ⬆️⬇️⬅️➡️';
+        });
+        card3d.addEventListener('mouseleave', () => {
+            posSpan.innerText = originalPos;
+        });
+
+        // ---- quick reference toggle ----
+        const refToggle = document.getElementById('refToggle');
+        const refContent = document.getElementById('refContent');
+        const toggleIcon = document.getElementById('toggleIcon');
+        refToggle.addEventListener('click', () => {
+            const isOpen = refContent.classList.contains('show');
+            if (isOpen) {
+                refContent.classList.remove('show');
+                toggleIcon.classList.remove('fa-chevron-up');
+                toggleIcon.classList.add('fa-chevron-down');
+            } else {
+                refContent.classList.add('show');
+                toggleIcon.classList.remove('fa-chevron-down');
+                toggleIcon.classList.add('fa-chevron-up');
             }
+        });
 
-            function stopBlitzHover() {
-                if (blitzInterval) {
-                    clearInterval(blitzInterval);
-                    blitzInterval = null;
-                }
-                if (timerInterval) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                }
-                flickerSpan.textContent = 'STEADY HAND';  // reset
-                timerSpan.textContent = '00:00';
-            }
+        // ---- stamp click fun everywhere ----
+        document.body.addEventListener('click', function(e) {
+            if (e.target.closest('a')) return; // avoid interfering with links
+            const stamp = document.createElement('div');
+            stamp.className = 'stamp-click-effect';
+            stamp.innerHTML = '卐';
+            stamp.style.left = (e.pageX - 20) + 'px';
+            stamp.style.top = (e.pageY - 20) + 'px';
+            stamp.style.color = '#3069ff';
+            stamp.style.fontWeight = 'bold';
+            document.body.appendChild(stamp);
+            setTimeout(() => stamp.remove(), 800);
+        });
 
-            cardBlitz.addEventListener('mouseenter', startBlitzHover);
-            cardBlitz.addEventListener('mouseleave', stopBlitzHover);
-
-            // Card 3: flash [V] [I] and random valid/invalid count
-            const cardInspector = document.getElementById('card-inspector');
-            const validInvalidSpan = document.getElementById('valid-invalid');
-            let inspectorInterval = null;
-
-            function startInspectorHover() {
-                let flash = true;
-                if (inspectorInterval) clearInterval(inspectorInterval);
-                inspectorInterval = setInterval(() => {
-                    // alternate [V] [I] hint
-                    const preview = document.getElementById('preview-inspector');
-                    const keyHint = preview.querySelector('.key-hint');
-                    if (keyHint) {
-                        keyHint.style.backgroundColor = flash ? '#b33b3b' : '#2d1e14';
-                        keyHint.style.color = '#ffefc0';
-                    }
-                    // random valid/invalid counter
-                    const valid = Math.floor(Math.random() * 30) + 5;
-                    const invalid = Math.floor(Math.random() * 10);
-                    validInvalidSpan.textContent = `VALID ${valid} / INVALID ${invalid}`;
-                    flash = !flash;
-                }, 400);
-            }
-
-            function stopInspectorHover() {
-                if (inspectorInterval) {
-                    clearInterval(inspectorInterval);
-                    inspectorInterval = null;
-                }
-                validInvalidSpan.textContent = 'VALID 8 / INVALID 2'; // reset
-                const preview = document.getElementById('preview-inspector');
-                const keyHint = preview.querySelector('.key-hint');
-                if (keyHint) {
-                    keyHint.style.backgroundColor = ''; 
-                    keyHint.style.color = '';
-                }
-            }
-
-            cardInspector.addEventListener('mouseenter', startInspectorHover);
-            cardInspector.addEventListener('mouseleave', stopInspectorHover);
-
-            // Card 1: subtle effect — change "Position" text on hover
-            const card3d = document.getElementById('card-3d');
-            const posSpan = card3d.querySelector('div[style*="margin-top: 0.8rem;"]');
-            const originalText = posSpan.textContent;
-            card3d.addEventListener('mouseenter', () => {
-                posSpan.innerHTML = '📍 Position: ⬆️⬇️⬅️➡️ मतदान केन्द्र';
-            });
-            card3d.addEventListener('mouseleave', () => {
-                posSpan.innerHTML = originalText;
-            });
-
-            // Quick reference toggle
-            const refToggle = document.getElementById('ref-toggle');
-            const refContent = document.getElementById('ref-content');
-            const toggleIcon = document.getElementById('toggle-icon');
-
-            refToggle.addEventListener('click', function() {
-                const isShowing = refContent.classList.contains('show');
-                if (isShowing) {
-                    refContent.classList.remove('show');
-                    toggleIcon.classList.remove('fa-chevron-up');
-                    toggleIcon.classList.add('fa-chevron-down');
-                } else {
-                    refContent.classList.add('show');
-                    toggleIcon.classList.remove('fa-chevron-down');
-                    toggleIcon.classList.add('fa-chevron-up');
-                }
-            });
-
-            // Optional: tiny extra stamp on header click (playful)
-            const header = document.querySelector('.header');
-            header.addEventListener('click', function(e) {
-                const stamp = document.createElement('div');
-                stamp.textContent = '卐';
-                stamp.style.position = 'absolute';
-                stamp.style.left = e.clientX - 20 + 'px';
-                stamp.style.top = (e.clientY - 20 + window.scrollY) + 'px';
-                stamp.style.fontSize = '3rem';
-                stamp.style.color = '#b33b3b';
-                stamp.style.opacity = '0.6';
-                stamp.style.pointerEvents = 'none';
-                stamp.style.transform = 'rotate(10deg)';
-                stamp.style.transition = 'opacity 1s';
-                document.body.appendChild(stamp);
-                setTimeout(() => { stamp.remove(); }, 800);
-            });
-        })();
-    </script>
-    <!-- ensure the toggle icon is set correctly on load (content not shown) -->
-    <script>
-        (function initRef() {
-            // just ensure icon is down
-            document.getElementById('ref-content').classList.remove('show');
-            document.getElementById('toggle-icon').classList.add('fa-chevron-down');
-        })();
-    </script>
+        // additional floating emoji on header (just for delight)
+        const husigBar = document.querySelector('.husig-bar');
+        husigBar.addEventListener('mouseenter', () => {
+            husigBar.style.transform = 'scale(1.01)';
+        });
+        husigBar.addEventListener('mouseleave', () => {
+            husigBar.style.transform = 'scale(1)';
+        });
+    })();
+</script>
+<!-- ensure ref content starts closed -->
+<script>
+    (function() {
+        document.getElementById('refContent').classList.remove('show');
+        document.getElementById('toggleIcon').classList.add('fa-chevron-down');
+    })();
+</script>
 </body>
 </html>
